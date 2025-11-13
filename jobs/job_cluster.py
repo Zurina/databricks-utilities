@@ -9,18 +9,18 @@ notebook_path = f"/Users/{w.current_user.me().user_name}/random_numbers"
 
 job_cluster_key = "my_job_cluster"
 
-team = "alpha"
+team = "beta"
 
 created_job = w.jobs.create(
-    name=f"sdk-{time.time_ns()}",
+    name=f"{team}-{time.time_ns()}",
     tags={"Team": team},
     job_clusters=[
         jobs.JobCluster(
             job_cluster_key=job_cluster_key,
             new_cluster=ClusterSpec(
-                spark_version="14.3.x-scala2.12",
-                node_type_id="Standard_DS3_v2",
-                is_single_node=True
+                spark_version="15.4.x-scala2.12",
+                node_type_id="Standard_D4s_v3",  # ✅ smallest recommended
+                num_workers=1,                  # also helps minimize cost
             )
         )
     ],
@@ -35,6 +35,6 @@ created_job = w.jobs.create(
     ],
 )
 
-run_by_id = w.jobs.run_now(job_id=created_job.job_id).result()
+# run_by_id = w.jobs.run_now(job_id=created_job.job_id).result()
 
-print(f"Created job with id={created_job.job_id}, run id={run_by_id.run_id}")
+# print(f"Created job with id={created_job.job_id}, run id={run_by_id.run_id}")
