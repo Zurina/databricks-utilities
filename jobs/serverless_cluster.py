@@ -6,12 +6,12 @@ w = WorkspaceClient()
 
 notebook_path = f"/Users/{w.current_user.me().user_name}/random_numbers"
 
-team = "alpha"
+team = "beta"
 
 created_job = w.jobs.create(
-    name=f"sdk-{time.time_ns()}",
+    name=f"beta-serverless-{time.time_ns()}",
     tags={"Team": team},
-    # usage_policy_id="4c21e9c8-164f-49cd-9070-541740884f94",  # Replace with your budget usage policy ID
+    usage_policy_id="36e91398-96d2-4429-9aa1-d036524ddb7a",  # Replace with your budget usage policy ID
     tasks=[
         jobs.Task(
             description="my first serverless job",
@@ -22,6 +22,6 @@ created_job = w.jobs.create(
     ],
 )
 
-run_by_id = w.jobs.run_now(job_id=created_job.job_id).result()
+# run_by_id = w.jobs.run_now(job_id=created_job.job_id).result()
 
-print(f"Created job with id={created_job.job_id}, run id={run_by_id.run_id}")
+# print(f"Created job with id={created_job.job_id}, run id={run_by_id.run_id}")
